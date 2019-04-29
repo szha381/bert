@@ -385,7 +385,10 @@ class PostHouseProcessor(DataProcessor):
         for index, line in enumerate(reader):
             guid = 'train-%d' % index
             split_line = line.strip().split('\t')
-            text_a = tokenization.convert_to_unicode(split_line[1])
+            try:
+                text_a = tokenization.convert_to_unicode(split_line[1])
+            except:
+                print(line)
             # text_b = tokenization.convert_to_unicode(split_line[2])
             text_b = ""
             label = split_line[0]
