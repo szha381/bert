@@ -386,7 +386,8 @@ class PostHouseProcessor(DataProcessor):
             guid = 'train-%d' % index
             split_line = line.strip().split('\t')
             text_a = tokenization.convert_to_unicode(split_line[1])
-            text_b = tokenization.convert_to_unicode(split_line[2])
+            # text_b = tokenization.convert_to_unicode(split_line[2])
+            text_b = ""
             label = split_line[0]
             examples.append(InputExample(guid=guid, text_a=text_a,
                                          text_b=text_b, label=label))
@@ -401,7 +402,8 @@ class PostHouseProcessor(DataProcessor):
             guid = 'dev-%d' % index
             split_line = line.strip().split('\t')
             text_a = tokenization.convert_to_unicode(split_line[1])
-            text_b = tokenization.convert_to_unicode(split_line[2])
+            # text_b = tokenization.convert_to_unicode(split_line[2])
+            text_b = ""
             label = split_line[0]
             examples.append(InputExample(guid=guid, text_a=text_a,
                                          text_b=text_b, label=label))
@@ -416,7 +418,8 @@ class PostHouseProcessor(DataProcessor):
             guid = 'test-%d' % index
             split_line = line.strip().split('\t')
             text_a = tokenization.convert_to_unicode(split_line[1])
-            text_b = tokenization.convert_to_unicode(split_line[2])
+            # text_b = tokenization.convert_to_unicode(split_line[2])
+            text_b = ""
             label = split_line[0]
             examples.append(InputExample(guid=guid, text_a=text_a,
                                          text_b=text_b, label=label))
