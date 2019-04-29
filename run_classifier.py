@@ -374,6 +374,59 @@ class ColaProcessor(DataProcessor):
     return examples
 
 
+class PostHouseProcessor(DataProcessor):
+    """驿站数据处理"""
+
+    def get_train_examples(self, data_dir):
+        file_path = os.path.join(data_dir, 'train.csv')
+        with open(file_path, 'r') as f:
+            reader = f.readlines()
+        examples = []
+        for index, line in enumerate(reader):
+            guid = 'train-%d' % index
+            split_line = line.strip().split('\t')
+            text_a = tokenization.convert_to_unicode(split_line[1])
+            text_b = tokenization.convert_to_unicode(split_line[2])
+            label = split_line[0]
+            examples.append(InputExample(guid=guid, text_a=text_a,
+                                         text_b=text_b, label=label))
+        return examples
+
+    def get_dev_examples(self, data_dir):
+        file_path = os.path.join(data_dir, 'dev.csv')
+        with open(file_path, 'r') as f:
+            reader = f.readlines()
+        examples = []
+        for index, line in enumerate(reader):
+            guid = 'dev-%d' % index
+            split_line = line.strip().split('\t')
+            text_a = tokenization.convert_to_unicode(split_line[1])
+            text_b = tokenization.convert_to_unicode(split_line[2])
+            label = split_line[0]
+            examples.append(InputExample(guid=guid, text_a=text_a,
+                                         text_b=text_b, label=label))
+        return examples
+
+    def get_test_examples(self, data_dir):
+        file_path = os.path.join(data_dir, 'test.csv')
+        with open(file_path, 'r') as f:
+            reader = f.readlines()
+        examples = []
+        for index, line in enumerate(reader):
+            guid = 'test-%d' % index
+            split_line = line.strip().split('\t')
+            text_a = tokenization.convert_to_unicode(split_line[1])
+            text_b = tokenization.convert_to_unicode(split_line[2])
+            label = split_line[0]
+            examples.append(InputExample(guid=guid, text_a=text_a,
+                                         text_b=text_b, label=label))
+        return examples
+
+    def get_labels(self):
+        """See base class."""
+        return ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56"]
+
+
 def convert_single_example(ex_index, example, label_list, max_seq_length,
                            tokenizer):
   """Converts a single `InputExample` into a single `InputFeatures`."""
@@ -788,6 +841,8 @@ def main(_):
       "mnli": MnliProcessor,
       "mrpc": MrpcProcessor,
       "xnli": XnliProcessor,
+      "post": PostHouseProcessor
+
   }
 
   tokenization.validate_case_matches_checkpoint(FLAGS.do_lower_case,
